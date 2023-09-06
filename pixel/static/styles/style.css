@@ -54,6 +54,12 @@ table {
     border-spacing: 0;
 }
 
+/* logo momentaneo */
+h1 {
+    color: white;
+    font-size: 45px;
+}
+
 .banner {
     width: auto;
     position: relative;

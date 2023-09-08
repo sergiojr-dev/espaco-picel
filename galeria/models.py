@@ -13,8 +13,7 @@ class Fotografia(models.Model):
 
     nome = models.CharField(max_length=60, null=False, blank=False)
     legenda = models.CharField(max_length=150, null=False, blank=False)
-    categoria = models.CharField(max_length=50, choices=OPCOES_CATEGORIAS, default='')
-    #choice serve para dizer que serão categorias pré definidas e selecionaveis e default para dizer em qual ela inicia
+    categoria = models.CharField(max_length=50, choices=OPCOES_CATEGORIAS, default='') #choice serve para dizer que serão categorias pré definidas e selecionaveis e default para dizer em qual ela inicia
     descricao = models.TextField(null=False, blank=False)
     foto = models.ImageField(upload_to="fotos/%Y/%m/%d/", blank=True)
     publicada = models.BooleanField(default=False)

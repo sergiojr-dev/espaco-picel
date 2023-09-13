@@ -7,7 +7,7 @@
 </head>
 
 <section class="galeria" style="margin-left: 5em">
-    <form action="" method="post">
+    <form action="{% url 'cadastro' %}" method="POST">
             {% csrf_token %}
             <div class="row">
                     {% for field in form.visible_fields %}
@@ -22,6 +22,12 @@
                 <button type="submit" class="btn btn-success col-12" style="padding: top 5px;">Cadastrar</button>
             
             </div>
+            {% for message in messages %}
+            <div class="alert alert-primary">
+                    <p id="messages">{{message}}</p>
+            </div>
+            {% endfor %}
+            
         <div>
 
 {% endblock %}

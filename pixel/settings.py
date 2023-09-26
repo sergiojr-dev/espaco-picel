@@ -76,10 +76,14 @@ WSGI_APPLICATION = 'pixel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+DATABASES = {                                          # alteração no banco de dados para o postgre config da minha maquina local
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'blog'),
+        'USER': os.environ.get('DB_USER', 'vinicius481'),
+        'PASSWORD': os.environ.get('DB_PASS', 'vini060504'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

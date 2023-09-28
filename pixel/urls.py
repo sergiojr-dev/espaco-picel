@@ -24,4 +24,3 @@ urlpatterns = [
     path('', include('galeria.urls')),
     path('', include('usuario.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

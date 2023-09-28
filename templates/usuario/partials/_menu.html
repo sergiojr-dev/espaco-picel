@@ -1,25 +1,10 @@
 {% load static %}
 
 <div class="pagina-inicial">
-                    {% for message in messages %}
-                    <div class="alert alert-success">
-                            <p id="messages">{{message}}</p>
-                    </div>
-                    {% endfor %}
     <header class="cabecalho">
         {% comment %} <img src="{% static '/assets/logo/Logo(2).png' %}" alt="X Space Pixel" />   <! MUDAR LOGO DO SITE/> {% endcomment %}
         <h1 style="color: white; font-size: 45px;">X Space Pixel</h1>
-        <div class="cabecalho__busca">
-            <div class="busca__fundo">
-                <form action="{% url 'buscar' %}">
-                    <input class="busca__input" type="text" name="buscar" placeholder="O que você procura?">
-                    <button type="submit">
-                        <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
-                    </button>
-                </form>
 
-            </div>
-        </div>
     </header>
     <main class="principal">
         <section class="menu-lateral">
@@ -29,5 +14,3 @@
                 <a href="{% url 'login'%}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Login</a>
             </nav>
         </section>
-
-    

@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'pixel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {                                          # alteração no banco de dados para o postgre config da minha maquina local
+DATABASES = {                                          # Alteração no banco de dados para o postgre config do banco da minha maquina local
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DB_NAME', 'blog'),

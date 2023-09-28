@@ -1,10 +1,9 @@
-{% extends 'galeria/base.html' %}
+{% extends 'usuario/base.html' %}
 {% load static %}
 {% block content %}
 
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-</head>
+
+
 
 <section class="galeria" style="margin-left: 5em">
     <form action="{% url 'login' %}" method="POST">
@@ -22,12 +21,26 @@
                 <button type="submit" class="btn btn-success col-12" style="padding: top 5px;">Login</button>
             
             </div>
-            {% for message in messages %}
-            <div class="alert alert-primary">
-                    <p id="messages">{{message}}</p>
+
+            <a href= "{% url 'cadastro' %} "> Cadastra-se </a> 
+
+            <div>
+                {% for message in messages %}
+                    {% if "error" in message.tags %}
+                        <div class="alert alert-danger">
+                            <p id="messages">{{ message }}</p>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success">
+                            <p id="messages">{{ message }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
+            
+
         <div>
+        
 
 
              

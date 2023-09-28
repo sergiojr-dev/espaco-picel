@@ -65,3 +65,9 @@ def login(request):
            
         return render(request, "usuario/login.html", {"form": form})
 
+
+def logout(request):
+    auth.logout(request)
+    messages.success(request , f"Vocẽ saiu da conta")
+    
+    return redirect('login')

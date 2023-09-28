@@ -1,14 +1,15 @@
 {% load static %}
 
+
 <div class="pagina-inicial">
-                    {% for message in messages %}
+    <header class="cabecalho">
+        {% comment %} <img src="{% static '/assets/logo/Logo(2).png' %}" alt="X Space Pixel" />   <! MUDAR LOGO DO SITE/> {% endcomment %}
+        <h1 style="color: white; font-size: 45px;">X Space Pixel</h1>
+        {% for message in messages %}
                     <div class="alert alert-success">
                             <p id="messages">{{message}}</p>
                     </div>
                     {% endfor %}
-    <header class="cabecalho">
-        {% comment %} <img src="{% static '/assets/logo/Logo(2).png' %}" alt="X Space Pixel" />   <! MUDAR LOGO DO SITE/> {% endcomment %}
-        <h1 style="color: white; font-size: 45px;">X Space Pixel</h1>
         <div class="cabecalho__busca">
             <div class="busca__fundo">
                 <form action="{% url 'buscar' %}">
@@ -26,7 +27,7 @@
             <nav class="menu-lateral__navegacao">
                 <a href="{% url 'index'%}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>   
                 <a href="{% url 'cadastro'%}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Cadastro</a>
-                <a href="{% url 'login'%}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Login</a>
+                <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Sair</a>
             </nav>
         </section>
 

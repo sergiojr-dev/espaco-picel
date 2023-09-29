@@ -50,6 +50,16 @@ class CadastroForms(forms.Form):
                 }
             ),
         )
+    
+    def clean_nome_cadastro(self):
+        nome = self.cleaned_data.get('nome_cadastro')
+        
+        if nome:
+            nome = nome.strip() # serve para remover espaços em branco (ou outros caracteres especificados) do início e do fim de uma string
+            if ' ' in nome:
+                    raise forms.ValidationError('Espaços não são permitidos nesse campo')
+            else:
+                    return nome      
 
 class LoginForms(forms.Form):
     nome_login=forms.CharField(
@@ -74,3 +84,9 @@ class LoginForms(forms.Form):
             }
         ),
     )
+
+
+
+
+    
+

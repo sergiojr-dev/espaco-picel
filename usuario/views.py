@@ -68,6 +68,6 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    messages.success(request , f"Vocẽ saiu da conta")
+    messages.success(request , f"Você saiu da conta")
     
     return redirect('login')

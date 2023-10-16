@@ -3,8 +3,9 @@
 
 <div class="pagina-inicial">
     <header class="cabecalho">
-        {% comment %} <img src="{% static '/assets/logo/Logo(2).png' %}" alt="X Space Pixel" />   <! MUDAR LOGO DO SITE/> {% endcomment %}
-        <h1 style="color: white; font-size: 45px;">X Space Pixel</h1>
+                {% comment %} <img src="{% static '/assets/logo/Logo(2).png' %}" alt="X Space Pixel" />   <! MUDAR LOGO DO SITE/> {% endcomment %}
+                <h1 style="color: white; font-size: 45px;">X Space Pixel</h1>
+        
         {% for message in messages %}
                     <div class="alert alert-success">
                             <p id="messages">{{message}}</p>

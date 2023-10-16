@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from usuario.forms import LoginForms, CadastroForms
+from apps.usuario.forms import LoginForms, CadastroForms
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth #biblioteca de autentificação do django
@@ -12,7 +12,6 @@ def cadastro(request):
         form = CadastroForms(request.POST)
 
     if form.is_valid():
-
         
         nome =  form['nome_cadastro'].value()
         email = form['email'].value()

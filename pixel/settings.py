@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'galeria.apps.GaleriaConfig', # não vai puxar somente o aplicativo, e sim todos os arquivos com as configurações.
-    'usuario.apps.UsuarioConfig',
+    'apps.galeria.apps.GaleriaConfig', # não vai puxar somente o aplicativo, e sim todos os arquivos com as configurações.
+    'apps.usuario.apps.UsuarioConfig',
 ]
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-
+from apps.galeria.forms import fotografiaForms
 from apps.galeria.models import Fotografia
 
 def index(request):
@@ -27,3 +27,6 @@ def buscar(request):
     
     return render (request, "galeria/buscar.html", {"cards": fotografias})
 
+def postar (request):
+    form = fotografiaForms
+    return render(request,"galeria/postar.html", {'form' : form})

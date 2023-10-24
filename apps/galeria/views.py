@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from apps.galeria.forms import fotografiaForms
 from apps.galeria.models import Fotografia
-
+from django.contrib.auth.models import User
 def index(request):
     if not request.user.is_authenticated:
         messages.error(request, 'Usuário não logado')
@@ -27,6 +27,16 @@ def buscar(request):
     
     return render (request, "galeria/buscar.html", {"cards": fotografias})
 
-def postar (request):
-    form = fotografiaForms
-    return render(request,"galeria/postar.html", {'form' : form})
+def postar(request):
+    if request.method == "POST":
+        form = fotografiaForms(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Postagem feita com sucesso")
+            return redirect('index')
+    else:
+        # Filtre as opções de usuário apenas para o usuário logado
+        form = fotografiaForms()
+        form.fields['usuario'].queryset = User.objects.filter(pk=request.user.pk)
+
+    return render(request, "galeria/postar.html", {'form': form})

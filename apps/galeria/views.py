@@ -40,3 +40,22 @@ def postar(request):
         form.fields['usuario'].queryset = User.objects.filter(pk=request.user.pk)
 
     return render(request, "galeria/postar.html", {'form': form})
+
+def editar_postagem(request, foto_id):
+    fotografia = Fotografia.objects.get(id=foto_id)
+
+    form = fotografiaForms(instance=fotografia)
+
+    if request.method == 'POST':
+        form = fotografiaForms(request.POST, request.FILES, instance=fotografia)
+        if form.is_valid():
+            print(request.POST)
+            form.save()
+            messages.success(request, 'Fotografia editada com sucesso')
+            return redirect('index')
+    else:
+        # Filtre as opções de usuário apenas para o usuário logado
+        form = fotografiaForms()
+        form.fields['usuario'].queryset = User.objects.filter(pk=request.user.pk)
+
+    return render(request, 'galeria/editar_postagem.html', {'form':form, 'foto_id': foto_id})

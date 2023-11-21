@@ -10,6 +10,7 @@ class fotografiaForms(forms.ModelForm): # porque é form que esta tendo um model
             'descricao':'Descrição',
             'data_fotografia': 'Data de registro',
             'usuario': 'Usuário',
+            'nome' : 'Título'
 
         }
 

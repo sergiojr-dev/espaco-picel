@@ -51,7 +51,7 @@ def editar_postagem(request, foto_id):
         if form.is_valid():
             print(request.POST)
             form.save()
-            messages.success(request, 'Fotografia editada com sucesso')
+            messages.success(request, 'Postagem editada')
             return redirect('index')
     else:
         # Filtre as opções de usuário apenas para o usuário logado
@@ -59,3 +59,9 @@ def editar_postagem(request, foto_id):
         form.fields['usuario'].queryset = User.objects.filter(pk=request.user.pk)
 
     return render(request, 'galeria/editar_postagem.html', {'form':form, 'foto_id': foto_id})
+
+def deletar_postagem(request, foto_id):
+    fotografia = Fotografia.objects.get(id=foto_id)
+    fotografia.delete()
+    messages.success(request, 'Postagem deletada!')
+    return redirect('index')

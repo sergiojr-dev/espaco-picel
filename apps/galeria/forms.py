@@ -2,7 +2,7 @@ from typing import Any
 from django import forms
 from apps.galeria.models import Fotografia
 
-class fotografiaForms(forms.ModelForm): # porque é form que esta tendo um modelo para ser criada no caso Models de fotografia
+class FotografiaForms(forms.ModelForm): # porque é form que esta tendo um modelo para ser criada no caso Models de fotografia
     class Meta :                   #  essa classe refere-se aos metadados da classe. Metadados são dados que fazem referência à própria natureza daquela classe
         model = Fotografia        # conexão com model
         exclude = ['publicada',] # o que não quero de Model

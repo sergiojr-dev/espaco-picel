@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from apps.galeria.forms import fotografiaForms
+from apps.galeria.forms import FotografiaForms
 from apps.galeria.models import Fotografia
 from django.contrib.auth.models import User
 def index(request):
@@ -29,35 +29,31 @@ def buscar(request):
 
 def postar(request):
     if request.method == "POST":
-        form = fotografiaForms(request.POST, request.FILES)
+        form = FotografiaForms(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Postagem feita com sucesso")
             return redirect('index')
     else:
         # Filtre as opções de usuário apenas para o usuário logado
-        form = fotografiaForms()
+        form = FotografiaForms()
         form.fields['usuario'].queryset = User.objects.filter(pk=request.user.pk)
 
     return render(request, "galeria/postar.html", {'form': form})
 
+
+
 def editar_postagem(request, foto_id):
     fotografia = Fotografia.objects.get(id=foto_id)
-
-    form = fotografiaForms(instance=fotografia)
+    form = FotografiaForms(instance=fotografia)
 
     if request.method == 'POST':
-        form = fotografiaForms(request.POST, request.FILES, instance=fotografia)
+        form = FotografiaForms(request.POST, request.FILES, instance=fotografia)
         if form.is_valid():
             print(request.POST)
             form.save()
-            messages.success(request, 'Postagem editada')
+            messages.success(request, 'Fotografia editada com sucesso')
             return redirect('index')
-    else:
-        # Filtre as opções de usuário apenas para o usuário logado
-        form = fotografiaForms()
-        form.fields['usuario'].queryset = User.objects.filter(pk=request.user.pk)
-
     return render(request, 'galeria/editar_postagem.html', {'form':form, 'foto_id': foto_id})
 
 def deletar_postagem(request, foto_id):

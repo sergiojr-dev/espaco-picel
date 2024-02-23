@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Django settings for pixel project.
 
@@ -39,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.galeria.apps.GaleriaConfig', # não vai puxar somente o aplicativo, e sim todos os arquivos com as configurações.
     'apps.usuario.apps.UsuarioConfig',
+    'apps.comentario.apps.ComentarioConfig'
 ]
+
 
 
 MIDDLEWARE = [

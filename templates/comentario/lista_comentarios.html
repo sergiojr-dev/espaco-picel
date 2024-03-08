@@ -1,0 +1,65 @@
+{% extends 'galeria/base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Detalhes da Fotografia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Adicione os estilos do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Remova a linha abaixo, pois você já está importando o Bootstrap acima -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+    <style>
+        /* Estilo para a tabela */
+        .custom-table {
+            width: 100%; /* Largura da tabela */
+            background-color: #e3f2fd; /* Cor de fundo azul claro */
+        }
+    </style>
+</head>
+
+<div class="container mt-5">
+    <!-- Comentários -->
+    <div class="row mt-3">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h6 style="color: black;">Comentários</h6>
+                </div>
+                <table class="table custom-table"> <!-- Adicionado a classe custom-table para aplicar o estilo -->
+                    <tbody>
+                        <!-- Loop de comentários Django -->
+                        {% for comentario in fotografia.comentario_set.all %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>{{ comentario.usuario }}</strong>
+                                            <span class="text-muted"> • {{ comentario.data_comentario|date:"d/m/Y H:i" }}</span>
+                                        </div>
+                                    </div>
+                                    <p class="mt-2">{{ comentario.comment }}</p>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td>Nenhum comentário ainda.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</section>
+
+<!-- Adicione os scripts do Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+{% endblock %}

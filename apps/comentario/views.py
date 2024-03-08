@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from apps.galeria.models import Fotografia
-from apps.galeria.forms import FotografiaForms
+from apps.comentario.models import Comentario
 
 def criar_comentario(request, foto_id):
     fotografia = Fotografia.objects.get(id=foto_id)
@@ -26,5 +26,6 @@ def criar_comentario(request, foto_id):
 
 
 
-
-
+def lista_comentarios(request, foto_id):
+    fotografia = Fotografia.objects.get(id=foto_id)  # Obtenha a fotografia com o ID fornecido
+    return render(request, 'comentario/lista_comentarios.html', {'fotografia': fotografia})

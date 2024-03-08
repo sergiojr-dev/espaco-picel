@@ -11,7 +11,7 @@ class ComentarioForms(forms.ModelForm):
         }
 
         widgets = {
-        'comment': forms.TextInput(attrs={'class':'form-control'}),
+        'comment':  forms.Textarea(attrs={'class':'form-control'}),
         'usuario': forms.Select(attrs={"class": "form-control"}),
         'data_comentario': forms.DateInput(  # para formularios do tipo data
                 format = '%d/%m/%Y',

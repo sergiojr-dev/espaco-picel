@@ -29,3 +29,26 @@ def criar_comentario(request, foto_id):
 def lista_comentarios(request, foto_id):
     fotografia = Fotografia.objects.get(id=foto_id)  # Obtenha a fotografia com o ID fornecido
     return render(request, 'comentario/lista_comentarios.html', {'fotografia': fotografia})
+
+
+from django.shortcuts import get_object_or_404
+
+def editar_comentario(request, comentario_id):
+    comentario = Comentario.objects.get(id=comentario_id)
+    form = ComentarioForms(instance=comentario)
+
+    if request.method == 'POST':
+        form = ComentarioForms(request.POST, instance=comentario)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Comentário editado com sucesso')
+            return redirect('lista_comentarios', foto_id=comentario.post1.id)
+    return render(request, 'comentario/editar_comentario.html', {'form': form, 'comentario_id': comentario_id})
+
+def deletar_comentario(request, comentario_id):
+    comentario = Comentario.objects.get(id=comentario_id)
+    fotografia_id = comentario.post1_id
+    comentario.delete()
+    messages.success(request, 'Comentário deletado!')
+    return redirect('lista_comentarios', foto_id=fotografia_id)
+

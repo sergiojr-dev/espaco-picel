@@ -26,7 +26,19 @@ class Fotografia(models.Model):
         related_name= 'user',                  #  e para facilitar a localização de tabelas e funcionalidades
     )
 
+    likes_count = models.IntegerField(default= 0)
+
 
 
     def __str__(self):
         return self.nome
+    
+class Like(models.Model):
+    fotografia = models.ForeignKey(Fotografia, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    class Meta:
+        unique_together = ('fotografia', 'user',)
+
+    def __str__(self):
+        return f'{self.user.username} likes {self.fotografia.nome}'

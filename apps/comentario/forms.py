@@ -4,6 +4,7 @@ from apps.comentario.models import Comentario
 class ComentarioForms(forms.ModelForm):
     class Meta :
         model = Comentario
+        exclude = ['usuario']
         fields = ['comment', 'usuario',]
         labels = {
             'usuario' : 'Nome',

@@ -19,7 +19,7 @@ def criar_comentario(request, foto_id):
             return redirect("imagem", foto_id=foto_id)
     else:
         form = ComentarioForms()
-        form.fields['usuario'].queryset = User.objects.filter(pk=request.user.pk)
+        
         
     return render(request, "comentario/criar_comentario.html", {'form': form, 'foto_id': foto_id})
 

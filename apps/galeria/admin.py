@@ -1,5 +1,6 @@
 from django.contrib import admin
-from apps.galeria.models import Fotografia
+from apps.galeria.models import Fotografia, Like
+
 
 
 class CadastroAdmin(admin.ModelAdmin):
@@ -12,3 +13,8 @@ class CadastroAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Fotografia, CadastroAdmin)
+
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ('fotografia', 'user')
+
+admin.site.register(Like, LikeAdmin)

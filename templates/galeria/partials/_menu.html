@@ -10,7 +10,8 @@
                     <div class="alert alert-success">
                             <p id="messages">{{message}}</p>
                     </div>
-                    {% endfor %}
+        {% endfor %}
+        
         <div class="cabecalho__busca">
             <div class="busca__fundo">
                 <form action="{% url 'buscar' %}">
@@ -22,15 +23,18 @@
 
             </div>
         </div>
+        
     </header>
     <main class="principal">
         <section class="menu-lateral">
             <nav class="menu-lateral__navegacao">
-                <a href="{% url 'index'%}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>   
-                <a href="{% url 'postar' %}"><img src="{% static '/assets/ícones/1x/postagem.png' %}"> Postar</a>
-                <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Sair</a>
+                <a href="{% url 'index'%}"><img src="{% static '/assets/icones/1x/Home - ativo.png' %}"> Home</a>   
+                <a href="{% url 'postar' %}"><img src="{% static '/assets/icones/1x/postagem.png' %}"> Postar</a>
+                <a href="{% url 'editar_usuario' user.id %}"> <img src="{% static '/assets/icones/1x/perfil.png' %}">Editar Perfil</a>
+                <a href="{% url 'logout' %}"><img src="{% static '/assets/icones/1x/Surpreenda-me - inativo.png' %}"> Sair</a>
                 
             </nav>
+
         </section>
 
     

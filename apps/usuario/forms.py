@@ -110,3 +110,69 @@ class LoginForms(forms.Form):
 
     
 
+class EditarUsuarioForms(forms.ModelForm):
+    password = forms.CharField(
+        label='Senha',
+        required=False,
+        max_length=70,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Digite sua senha'}),
+    )
+
+    nova_senha = forms.CharField(
+        label='Nova Senha',
+        required=False,
+        max_length=70,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Digite a nova senha'}),
+    )
+
+    confirmar_nova_senha = forms.CharField(
+        label='Confirmar Nova Senha',
+        required=False,
+        max_length=70,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Digite novamente a nova senha'}),
+    )
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
+    def clean_username(self):
+        nome = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+
+        if User.objects.filter(username=nome).exists() and User.objects.get(username=nome).id != self.instance.id:
+            raise forms.ValidationError('Este usuário já existe')
+
+        if 'email' in self.changed_data:
+            if User.objects.filter(email=email).exists() and User.objects.get(email=email).id != self.instance.id:
+                raise forms.ValidationError('Este email já está em uso')
+
+        nome = nome.strip()
+        if ' ' in nome:
+            raise forms.ValidationError('Espaços não são permitidos neste campo')
+        return nome
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        nova_senha = cleaned_data.get('nova_senha')
+        confirmar_nova_senha = cleaned_data.get('confirmar_nova_senha')
+
+        if password and not self.instance.check_password(password):
+            self.add_error('password', 'Senha atual incorreta')
+
+        if nova_senha and nova_senha != confirmar_nova_senha:
+            self.add_error('confirmar_nova_senha', 'As senhas não coincidem')
+
+        return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        nova_senha = self.cleaned_data.get('nova_senha')
+
+        if nova_senha:
+            user.set_password(nova_senha)
+
+        if commit:
+            user.save()
+        return user

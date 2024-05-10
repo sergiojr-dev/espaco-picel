@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from apps.usuario.forms import LoginForms, CadastroForms
+from apps.usuario.forms import LoginForms, CadastroForms, EditarUsuarioForms
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth #biblioteca de autentificação do django
@@ -65,3 +65,18 @@ def logout(request):
     messages.success(request , f"Você saiu da conta")
     
     return redirect('login')
+
+
+def editar_usuario(request, user_id):
+    user = User.objects.get(id=user_id)
+    form = EditarUsuarioForms(request.POST or None, instance=user)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Usuário atualizado com sucesso!')
+            return redirect('index')
+        
+    
+    return render(request, 'usuario/editar_usuario.html', {'form': form, 'user': user})
+
